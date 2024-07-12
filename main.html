@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="game_background.css">
+    <link rel="stylesheet" href="cursor.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="bk"></div>
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="main_box">
+        <div class="title" id="title"><b>Happy Card Game</b></div>
+        <button id="start">Start</button>
+        <button id="help">Help</button>
+    </div>
+    
+    <div class="game_box" id="game_box">
+        <div class="player_cards">
+            <div class="card" id="card1"></div>
+
+            <div class="card" id="card2"></div>
+
+            <div class="card" id="card3"></div>
+
+            <div class="card" id="card4"></div>
+
+            <div class="card" id="card5"></div>
+
+            <div class="card" id="card6"></div>
+        </div>
+        <div class="main_card" id="main_card">
+            <div class="main_card_text" id="main_card_text">
+                <div class="m_front" id="m_front"></div>
+                <div class="m_back" id="m_back"></div>
+            </div>
+        </div>
+        <div class="computer_card" id="computer_card">
+            <div class="computer_card_text" id="computer_card_text">
+                <div class="c_front" id="c_front"></div>
+                <div class="c_back" id="c_back"></div>
+            </div>
+        </div>
+        <div class="dolo" id="dolo"><b>抽牌</b></div>
+        <div class="gogo" id="gogo"><b>決定</b></div>
+
+        <div class="player_blood" id="player_blood">
+            <div class="player_blood_bar" id="player_blood_bar1"></div>
+            <div class="player_blood_bar" id="player_blood_bar2"></div>
+            <div class="player_blood_bar" id="player_blood_bar3"></div>
+            <div class="player_blood_bar" id="player_blood_bar4"></div>
+            <div class="player_blood_bar" id="player_blood_bar5"></div>
+        </div>
+        <div class="computer_blood" id="computer_blood">
+            <div class="computer_blood_bar" id="computer_blood_bar1"></div>
+            <div class="computer_blood_bar" id="computer_blood_bar2"></div>
+            <div class="computer_blood_bar" id="computer_blood_bar3"></div>
+            <div class="computer_blood_bar" id="computer_blood_bar4"></div>
+            <div class="computer_blood_bar" id="computer_blood_bar5"></div>
+        </div>
+
+        <div class="win_screen" id="win_screen">
+            <div class="win_text" id="win_text"></div>
+            <button class="play_again" id="play_again">再玩一次</button>
+            <button class="back_home" id="back_home">回到主畫面</button>
+        </div>
+    </div>
+    <div class="help_box" id="help_box">
+        <button class="help_button" id="help_button">X</button>
+        <div class="help_box_scroll">
+            <div class="help_card_box"><div class="help_card"><img src="./img/0.png"></div><div class="help_text"><b>基本卡片</b><p>輸的一方扣一滴血量</p></div></div>
+            <div class="help_card_box"><div class="help_card"><img src="./img/3.png"></div><div class="help_text"><b>功能卡片</b><p>回復自身一滴血量</p></div></div>
+            <div class="help_card_box"><div class="help_card"><img src="./img/4.png"></div><div class="help_text"><b>功能卡片</b><p>代替剪刀、石頭、布</p></div></div>
+            <div class="help_card_box"><div class="help_card"><img src="./img/5.png"></div><div class="help_text"><b>功能卡片</b><p>雙方血量互換</p></div></div>
+            <div class="help_card_box"><div class="help_card"><img src="./img/6.png"></div><div class="help_text"><b>功能卡片</b><p>重新抽自己的手牌</p></div></div>
+        </div>
+    </div>
+
+    <div id="home"><b>HOME</b></div>
+
+    <script src="cursor.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

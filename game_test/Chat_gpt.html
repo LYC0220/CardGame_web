@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn-based Card Battle</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        #player-cards, #computer-card {
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            width: 50px;
+            height: 70px;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        #status {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="player-cards"></div>
+    <div id="computer-card">?</div>
+    <div id="status">Player HP: 10 | Computer HP: 10</div>
+    <button id="draw-card">Draw Card</button>
+    <button id="play-card" disabled>Play Card</button>
+
+    <script>
+        const playerCardsElement = document.getElementById('player-cards');
+        const computerCardElement = document.getElementById('computer-card');
+        const statusElement = document.getElementById('status');
+        const drawButton = document.getElementById('draw-card');
+        const playButton = document.getElementById('play-card');
+
+        let playerDeck = [];
+        let computerDeck = [];
+        let playerCards = [];
+        let playerHP = 10;
+        let computerHP = 10;
+        let drawnCard = null;
+
+        function initializeGame() {
+            playerDeck = getFullDeck();
+            computerDeck = getFullDeck();
+            playerCards = getInitialCards(playerDeck);
+            updatePlayerCards();
+            updateStatus();
+            drawButton.disabled = false;
+            playButton.disabled = true;
+        }
+
+        function getFullDeck() {
+            // Create a full deck of cards (A to 10)
+            const deck = [];
+            for (let i = 1; i <= 10; i++) {
+                deck.push(i);
+                deck.push(i); // Each number should appear twice
+            }
+            shuffle(deck);
+            return deck;
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function getInitialCards(deck) {
+            // Draw 5 cards from the deck
+            return deck.splice(0, 5);
+        }
+
+        function drawCard() {
+            // Draw a card from the deck
+            return playerDeck.length > 0 ? playerDeck.shift() : null;
+        }
+
+        function updatePlayerCards() {
+            playerCardsElement.innerHTML = '';
+            playerCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerText = card;
+                cardElement.addEventListener('click', () => selectCard(card));
+                playerCardsElement.appendChild(cardElement);
+            });
+        }
+
+        function selectCard(card) {
+            drawnCard = card;
+            playButton.disabled = false;
+        }
+
+        function playRound() {
+            if (drawnCard === null) return;
+
+            const computerCard = drawCard();
+            computerCardElement.innerText = computerCard || '?';
+
+            if (computerCard === null) {
+                alert('No more cards in deck!');
+                return;
+            }
+
+            const playerAttack = drawnCard;
+            const computerAttack = computerCard;
+
+            if (playerAttack > computerAttack) {
+                computerHP--;
+            } else if (playerAttack < computerAttack) {
+                playerHP--;
+            }
+
+            playerCards = playerCards.filter(card => card !== drawnCard);
+            drawnCard = null;
+            playButton.disabled = true;
+            updatePlayerCards();
+            updateStatus();
+
+            if (playerHP <= 0) {
+                setTimeout(() => alert('Game Over! Computer wins!'), 500);
+                resetGame();
+            } else if (computerHP <= 0) {
+                setTimeout(() => alert('You win!'), 500);
+                resetGame();
+            } else if (playerCards.length === 0 && playerDeck.length === 0) {
+                setTimeout(() => alert('Game Over! Out of cards!'), 500);
+                resetGame();
+            }
+        }
+
+        function updateStatus() {
+            statusElement.innerText = `Player HP: ${playerHP} | Computer HP: ${computerHP}`;
+        }
+
+        function resetGame() {
+            playerHP = 10;
+            computerHP = 10;
+            playerDeck = getFullDeck();
+            computerDeck = getFullDeck();
+            playerCards = getInitialCards(playerDeck);
+            computerCardElement.innerText = '?';
+            updatePlayerCards();
+            updateStatus();
+            drawButton.disabled = false;
+            playButton.disabled = true;
+        }
+
+        drawButton.addEventListener('click', () => {
+            const newCard = drawCard();
+            if (newCard !== null) {
+                playerCards.push(newCard);
+                updatePlayerCards();
+                drawButton.disabled = true;
+                playButton.disabled = false;
+            }
+        });
+
+        playButton.addEventListener('click', () => {
+            playRound();
+        });
+
+        initializeGame();
+    </script>
+</body>
+</html>
